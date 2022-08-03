@@ -2,11 +2,14 @@
   "name": "toxic_app",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://trfdeer.github.io/toxic_web_app",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build --host",
-    "preview": "vite preview -- host"
+    "build": "tsc && vite build",
+    "preview": "vite preview -- host",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -21,6 +24,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
+    "gh-pages": "^4.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0"
   }
