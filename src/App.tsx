@@ -25,6 +25,14 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import InsertLinkSharpIcon from "@mui/icons-material/InsertLinkSharp";
 import TitleSharpIcon from "@mui/icons-material/TitleSharp";
 
+interface Prediction {
+  id: string,
+  text: string,
+  polarity: number,
+  toxic: boolean | undefined,
+  toxicity: object | undefined
+}
+
 const App = () => {
   const [currentMode, setCurrentMode] = useState("link");
   const [inputLabel, setInputLabel] = useState("Video URL");
@@ -41,7 +49,7 @@ const App = () => {
   const [commentsError, setCommentsError] = useState("");
 
   const [maxCommentCount, setMaxCommenCount] = useState(100);
-  const [commentData, setCommentData] = useState([]);
+  const [commentData, setCommentData] = useState<Prediction[]>([]);
 
   const [videoLinkInput, setVideLinkInput] = useState("");
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -105,7 +113,7 @@ const App = () => {
       .then((res) => {
         res
           .json()
-          .then((data) => {
+          .then((data: Prediction[]) => {
             setCommentsLoading(false);
             setCommentData(data);
           })
@@ -131,7 +139,7 @@ const App = () => {
       .then((res) => {
         res
           .json()
-          .then((data) => {
+          .then((data: Prediction) => {
             setCommentsLoading(false);
             console.log(data);
             setCommentData([data, ...commentData]);
